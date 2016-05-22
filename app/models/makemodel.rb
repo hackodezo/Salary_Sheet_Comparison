@@ -1,8 +1,7 @@
 class Makemodel < ActiveRecord::Migration
-  def self.import(file,project_name,file_name,start_column,end_column,unique,last_row)
+  def self.import(file,project_name,file_name,start_row,end_row,unique,last_column)
     spreadsheet = open_spreadsheet(file)
-    header = spreadsheet.row(1)
-    binding.pry
+    header = spreadsheet.row(start_row.to_i)
     name = "#{project_name.downcase}"+"#{file_name.downcase}"
     create_table name.pluralize do |t|
       header.each do |head|
@@ -15,9 +14,10 @@ class Makemodel < ActiveRecord::Migration
       f << "class #{model_name} < ActiveRecord::Base\nend"
     end
 
-    (2..spreadsheet.last_row).each do |i|
+    ((start_row.to_i+1)..end_row.to_i).each do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      product = Projectsource.new
+      #should find a logic to find the model class that is being created
+      product = Projecttarget.new
       product.attributes = row.to_hash
       product.save!
     end
