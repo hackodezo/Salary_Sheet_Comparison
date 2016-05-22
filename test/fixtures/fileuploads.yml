@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_name: MyString
+  file_name: MyString
+  start: MyString
+  end: MyString
+  unique: MyString
+  last_row: MyString
+
+two:
+  project_name: MyString
+  file_name: MyString
+  start: MyString
+  end: MyString
+  unique: MyString
+  last_row: MyString

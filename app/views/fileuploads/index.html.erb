@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Fileuploads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project name</th>
+      <th>File name</th>
+      <th>Start</th>
+      <th>End</th>
+      <th>Unique</th>
+      <th>Last row</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @fileuploads.each do |fileupload| %>
+      <tr>
+        <td><%= fileupload.project_name %></td>
+        <td><%= fileupload.file_name %></td>
+        <td><%= fileupload.start %></td>
+        <td><%= fileupload.end %></td>
+        <td><%= fileupload.unique %></td>
+        <td><%= fileupload.last_row %></td>
+        <td><%= link_to 'Show', fileupload %></td>
+        <td><%= link_to 'Edit', edit_fileupload_path(fileupload) %></td>
+        <td><%= link_to 'Destroy', fileupload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Fileupload', new_fileupload_path %>
