@@ -1,28 +1,17 @@
-== README
+Excel Comparison App
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+App is an excel comparison app in which u can upload 2 excel sheets with same header but there may or may not be difference in data and compare both the excel sheet for differece and isolate rolums with difference this is useful in case when you are analying hugge amount of excel entr
 
-Things you may want to cover:
+Gem Used
+  ->roo for execl import
 
-* Ruby version
+Specialities
+  All the table you enter is directly made into model so that u will retain the data and can also get hold of the data ie on the fly when an excel sheet is uploaded the model is created with the filename 
+  
+Till now 
+  On the fly table creation and basic excel import is done
+  
+Upcoming Works
+  Comparison of the excel sheets with the desired fields
+  
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
