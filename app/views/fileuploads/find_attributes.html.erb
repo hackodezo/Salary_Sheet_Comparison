@@ -1,0 +1,62 @@
+<script>
+  $( document ).ready(function() {
+    $("#proceed").click(function(){
+      var source = $("#source :selected")[0].text;
+      var target = $("#target :selected")[0].text;
+      var source_attribute = $("#source_attribute :selected")[0].text;
+      var target_attribute = $("#target_attribute :selected")[0].text;
+      $.ajax({
+        method: 'POST',
+        url: '/fileuploads/compare',
+        data: "source="+source+"&target="+target+"&source_attribute="+source_attribute+"&target_attribute="+target_attribute,
+        dataType: 'html',
+        statusCode: {
+
+        }
+      }).done(function(res){
+        $("#table").empty();
+        $("#table").show();
+        $("#table").append(res);
+        $("#attribute_filter").hide();
+        $("#attribute_filter_show").show()
+      });
+    });
+    $("#attribute_filter_show").click(function(){
+      $("#attribute_filter").show();
+      $("#attribute_filter_show").hide();
+      $("#table").hide()
+    });
+  });
+</script>
+<h3 style="text-align: center">Select the attributes to be compared</h3>
+<br/>
+<div id="attribute_filter">
+  <div class="row">
+    <div class="col-md-6">
+      <select multiple style="width:200px; height:200px;" id="source_attribute">
+        <%@source_attributes.each do |source_attribute|%>
+          <%if source_attribute != "id" && !source_attribute.blank? %>
+            <option text = <%="#{source_attribute}"%>><%="#{source_attribute}"%></option>
+          <%end%>
+      <%end%>
+      </select>
+    </div>
+    <div class="col-md-6">
+    <div class="col-md-3"></div>
+      <select multiple style="width:200px; height:200px;" id="target_attribute">
+        <%@target_attributes.each do |target_attribute|%>
+          <%if target_attribute != "id" && !target_attribute.blank? %>
+            <option text = <%="#{target_attribute}"%>><%="#{target_attribute}"%></option>
+          <%end%>
+        <%end%>
+      </select>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class = "col-md-5"></div>
+    <input type="button" value="Proceed to Compare" class="btn btn-danger" id="proceed">
+  </div>
+</div>
+
+<div id="table"></div>

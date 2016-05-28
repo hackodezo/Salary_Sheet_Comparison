@@ -1,29 +1,66 @@
 <script type="text/javascript" charset="utf-8">
-  
-</script>
-<h3 style="text-align: center">Compare Excel Sheets</h3>
+  $( document ).ready(function() {
+    $("#compare").click(function(){
+      if ($("#source :selected")[0] == undefined){
+        alert("Pleasee Select Source")
+        return false
+      }
+      if ($("#target :selected")[0] == undefined){
+        alert("Please Select Target")
+        return false
+      }
+      var source = $("#source :selected")[0].value;
+      var target = $("#target :selected")[0].value;
+      $.ajax({
+        method: 'POST',
+        url: '/fileuploads/find_attributes',
+        data: "source="+source+"&target="+target,
+        dataType: 'html',
+        statusCode: {
 
-<div class="row">
-  <div class="col-md-6">
-    <h3 style="text-align: center">Select The Source</h3>
-    <div class="col-md-4"></div>
-    <select multiple style="width:400px" id="source">
-      <%@fileuploads.each do |file|%>
-        <option value = <%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%>><%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%></option>
-      <%end%>
-    </select>
-  </div>
-  <div class="col-md-6">
-    <h3 style="text-align: center">Select the Target</h3>
-    <div class="col-md-3"></div>
-    <select multiple style="width:400px" id="target">
-      <%@fileuploads.each do |file|%>
+        }
+      }).done(function(res){
+        $("#attributes").empty();
+        $("#attributes").show();
+        $("#attributes").append(res);
+        $("#file_select").hide();
+        $("#file_filter_show").show()
+        $("#table").hide()
+      });
+    });
+    $("#file_filter_show").click(function(){
+      $("#file_select").show();
+      $("#file_filter_show").hide();
+    });
+  });
+</script>
+<input type="button" value="Show Project Filter" id="file_filter_show" style="display:none" class="btn btn-info">
+<input type="button" value="Show Attribute Filter" id="attribute_filter_show" style="display:none" class="btn btn-info">
+<div  id="file_select">
+  <h3 style="text-align: center">Compare Excel Sheets</h3>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 style="text-align: center">Select The Source</h3>
+      <div class="col-md-4"></div>
+      <select multiple style="width:400px" id="source">
+        <%@fileuploads.each do |file|%>
           <option value = <%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%>><%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%></option>
-      <%end%>
-    </select>
+        <%end%>
+      </select>
+    </div>
+    <div class="col-md-6">
+      <h3 style="text-align: center">Select the Target</h3>
+      <div class="col-md-3"></div>
+      <select multiple style="width:400px" id="target">
+        <%@fileuploads.each do |file|%>
+            <option value = <%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%>><%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%></option>
+        <%end%>
+      </select>
+    </div>
+  </div>
+  <div class="row">
+    <div class = "col-md-5"></div>
+    <input type="Button" class="btn btn-success" value="Compare" style="margin-left:45px" id="compare">
   </div>
 </div>
-<div class="row">
-  <div class = "col-md-5"></div>
-  <input type="Button" class="btn btn-success" value="Compare" style="margin-left:30px" id="Compare">
-</div>
+<div id="attributes"></div>
