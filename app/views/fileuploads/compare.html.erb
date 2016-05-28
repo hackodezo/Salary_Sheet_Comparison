@@ -5,26 +5,67 @@
 </script>
 <table id="compareison_table" >
   <thead>
-    <tr>
-      <td>Employee Id</td>
-      <td>Employee Name</td>
-      <td>Source value:<%=params[:source_attribute]%></td>
-      <td>Target value:<%=params[:target_attribute]%></td>
-    </tr>
+  <tr>
+    <td>Employee Id</td>
+    <td>Employee Name</td>
+    <td>Source value:<%=params[:source_attribute]%></td>
+    <td>Target value:<%=params[:target_attribute]%></td>
+  </tr>
   </thead>
   <boby>
     <%@source_attributes.each do |source|%>
         <%@target_attribute = @target_attributes.where("empid=?",source.empid)%>
-      <tr>
-        <td><%=source.empid%></td>
-        <td><%=source.employeename%></td>
-        <td><%=source.attributes[params[:source_attribute]]%></td>
         <%if @target_attribute.present?%>
-          <td><%=@target_attribute.first.attributes[params[:target_attribute]]%></td>
-        <%else%>
-          <td></td>
+            <%if source.attributes[params[:source_attribute]].to_f.to_s == source.attributes[params[:source_attribute]].to_f.to_s && @target_attribute.first.attributes[params[:target_attribute]].to_i.to_s == @target_attribute.first.attributes[params[:target_attribute]]%>
+                <%if source.attributes[params[:source_attribute]] == @target_attribute.first.attributes[params[:target_attribute]].to_f.to_s%>
+                    <tr>
+                      <td><%=source.empid%></td>
+                      <td><%=source.employeename%></td>
+                      <td><%=source.attributes[params[:source_attribute]]%></td>
+                      <%if @target_attribute.present?%>
+                          <td><%=@target_attribute.first.attributes[params[:target_attribute]]%></td>
+                      <%else%>
+                          <td></td>
+                      <%end%>
+                    </tr>
+                <%else%>
+                    <tr style="background-color: beige">
+                      <td><%=source.empid%></td>
+                      <td><%=source.employeename%></td>
+                      <td><%=source.attributes[params[:source_attribute]]%></td>
+                      <%if @target_attribute.present?%>
+                          <td><%=@target_attribute.first.attributes[params[:target_attribute]].to_f.to_s%></td>
+                      <%else%>
+                          <td></td>
+                      <%end%>
+                    </tr>
+                <%end%>
+            <%else%>
+                <%if source.attributes[params[:source_attribute]] == @target_attribute.first.attributes[params[:target_attribute]]%>
+                    <tr>
+                      <td><%=source.empid%></td>
+                      <td><%=source.employeename%></td>
+                      <td><%=source.attributes[params[:source_attribute]]%></td>
+                      <%if @target_attribute.present?%>
+                          <td><%=@target_attribute.first.attributes[params[:target_attribute]]%></td>
+                      <%else%>
+                          <td></td>
+                      <%end%>
+                    </tr>
+                <%else%>
+                    <tr style="background-color: beige">
+                      <td><%=source.empid%></td>
+                      <td><%=source.employeename%></td>
+                      <td><%=source.attributes[params[:source_attribute]]%></td>
+                      <%if @target_attribute.present?%>
+                          <td><%=@target_attribute.first.attributes[params[:target_attribute]]%></td>
+                      <%else%>
+                          <td></td>
+                      <%end%>
+                    </tr>
+                <%end%>
+            <%end%>
         <%end%>
-      </tr>
     <%end%>
   </boby>
 </table>
