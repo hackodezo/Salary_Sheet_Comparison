@@ -28,11 +28,12 @@
     });
   });
 </script>
-<h3 style="text-align: center">Select the attributes to be compared</h3>
 <br/>
-<div id="attribute_filter">
+<div id="attribute_filter" style="margin-left: 130px">
+  <h3 style="margin-left: 220px">Select the attributes to be compared</h3>
   <div class="row">
     <div class="col-md-6">
+      <p><%=params[:source]%></p>
       <select multiple style="width:200px; height:200px;" id="source_attribute">
         <%@source_attributes.each do |source_attribute|%>
           <%if source_attribute != "id" && !source_attribute.blank? %>
@@ -42,6 +43,7 @@
       </select>
     </div>
     <div class="col-md-6">
+    <p><%=params[:target]%></p>
     <div class="col-md-3"></div>
       <select multiple style="width:200px; height:200px;" id="target_attribute">
         <%@target_attributes.each do |target_attribute|%>
@@ -52,7 +54,7 @@
       </select>
     </div>
   </div>
-
+  <br/>
   <div class="row">
     <div class = "col-md-5"></div>
     <input type="button" value="Proceed to Compare" class="btn btn-danger" id="proceed">
