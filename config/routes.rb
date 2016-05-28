@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'fileuploads#new'
   post 'fileuploads/import_data'
+  post 'fileuploads/find_attributes'
+  post 'fileuploads/compare'
   resources :fileuploads
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

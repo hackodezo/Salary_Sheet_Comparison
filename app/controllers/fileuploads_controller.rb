@@ -1,5 +1,5 @@
 class FileuploadsController < ApplicationController
-  before_action :set_fileupload, only: [:show, :edit, :update, :destroy]
+  before_action :set_fileupload, only: [:show, :edit, :update, :destroy] , except: [:find_attributes , :compare]
 
   # GET /fileuploads
   # GET /fileuploads.json
@@ -10,8 +10,20 @@ class FileuploadsController < ApplicationController
   # GET /fileuploads/1
   # GET /fileuploads/1.json
   def show
+
   end
 
+  def find_attributes
+    @source_attributes = Object.const_get(params[:source]).attribute_names
+    @target_attributes = Object.const_get(params[:target]).attribute_names
+    render layout: nil
+  end
+
+  def compare
+    @source_attributes = Object.const_get(params[:source]).select(params[:source_attribute],"empid","employeename").all
+    @target_attributes = Object.const_get(params[:target]).select(params[:target_attribute],"empid","employeename").all
+    render layout: nil
+  end
   # GET /fileuploads/new
   def new
     @fileupload = Fileupload.new

@@ -1,0 +1,30 @@
+<script>
+  $(document).ready(function(){
+    $('#compareison_table').DataTable();
+  });
+</script>
+<table id="compareison_table" >
+  <thead>
+    <tr>
+      <td>Employee Id</td>
+      <td>Employee Name</td>
+      <td>Source value:<%=params[:source_attribute]%></td>
+      <td>Target value:<%=params[:target_attribute]%></td>
+    </tr>
+  </thead>
+  <boby>
+    <%@source_attributes.each do |source|%>
+        <%@target_attribute = @target_attributes.where("empid=?",source.empid)%>
+      <tr>
+        <td><%=source.empid%></td>
+        <td><%=source.employeename%></td>
+        <td><%=source.attributes[params[:source_attribute]]%></td>
+        <%if @target_attribute.present?%>
+          <td><%=@target_attribute.first.attributes[params[:target_attribute]]%></td>
+        <%else%>
+          <td></td>
+        <%end%>
+      </tr>
+    <%end%>
+  </boby>
+</table>

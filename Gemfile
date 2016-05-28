@@ -34,6 +34,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Unicorn as the app server
 gem 'rake'
+gem "twitter-bootstrap-rails"
 # gem 'unicorn'
 
 # Use Capistrano for deployment
