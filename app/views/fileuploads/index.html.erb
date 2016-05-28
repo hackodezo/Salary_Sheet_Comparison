@@ -1,37 +1,29 @@
-<p id="notice"><%= notice %></p>
+<script type="text/javascript" charset="utf-8">
+  
+</script>
+<h3 style="text-align: center">Compare Excel Sheets</h3>
 
-<h1>Listing Fileuploads</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Project name</th>
-      <th>File name</th>
-      <th>Start</th>
-      <th>End</th>
-      <th>Unique</th>
-      <th>Last row</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @fileuploads.each do |fileupload| %>
-      <tr>
-        <td><%= fileupload.project_name %></td>
-        <td><%= fileupload.file_name %></td>
-        <td><%= fileupload.start %></td>
-        <td><%= fileupload.end %></td>
-        <td><%= fileupload.unique %></td>
-        <td><%= fileupload.last_row %></td>
-        <td><%= link_to 'Show', fileupload %></td>
-        <td><%= link_to 'Edit', edit_fileupload_path(fileupload) %></td>
-        <td><%= link_to 'Destroy', fileupload, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Fileupload', new_fileupload_path %>
+<div class="row">
+  <div class="col-md-6">
+    <h3 style="text-align: center">Select The Source</h3>
+    <div class="col-md-4"></div>
+    <select multiple style="width:400px" id="source">
+      <%@fileuploads.each do |file|%>
+        <option value = <%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%>><%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%></option>
+      <%end%>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <h3 style="text-align: center">Select the Target</h3>
+    <div class="col-md-3"></div>
+    <select multiple style="width:400px" id="target">
+      <%@fileuploads.each do |file|%>
+          <option value = <%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%>><%="#{file.project_name.capitalize}"+"#{file.file_name.downcase}"%></option>
+      <%end%>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div class = "col-md-5"></div>
+  <input type="Button" class="btn btn-success" value="Compare" style="margin-left:30px" id="Compare">
+</div>

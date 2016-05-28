@@ -10,6 +10,7 @@ class FileuploadsController < ApplicationController
   # GET /fileuploads/1
   # GET /fileuploads/1.json
   def show
+
   end
 
   # GET /fileuploads/new
